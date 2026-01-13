@@ -11,22 +11,22 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="field">
     <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: "form-control mb-3" %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: "form-control mb-3" %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :completed, style: "display: block" %>
-    <%= form.check_box :completed %>
+    <%= form.check_box :completed, class: "mb-4" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary"%>
   </div>
 <% end %>
