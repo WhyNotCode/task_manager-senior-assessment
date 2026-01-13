@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TaskManagerSeniorAssessment</title>
+    <title>Task Manager</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
+    <%# FIXED: Use stylesheet_link_tag with the right path %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    
     <%= javascript_importmap_tags %>
   </head>
-
+  
   <body>
-    <%= yield %>
+    <div class="container mt-4">
+      <%= render 'layouts/navbar' =%>
+      
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -47,6 +47,17 @@ class TasksController < ApplicationController
     end
   end
 
+  # PATCH/PUT /task/1 or /task/1.json
+  def complete
+    respond_to do |format|
+      if @task.completed(true)
+        format.html { redirect_to @task, notice: "Task was successfully updated.", status: :see_other }
+        format.json { render :show, status: :ok, location: @task }
+      end
+    end
+  end
+
+
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
     @task.destroy!

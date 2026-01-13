@@ -1,2 +1,7 @@
+// Import Bootstrap only
 @import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';
+
+/* Custom styles */
+body {
+  padding-top: 20px;
+}
