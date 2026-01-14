@@ -1,15 +1,22 @@
 class WeatherController < ApplicationController
   def index
-    puts "DEBUG: WeatherController#index called"
-    puts "DEBUG: Request IP: #{request.remote_ip}"
-    puts "DEBUG: Params: #{params.inspect}"
+    # Get user IP (will be localhost in development)
+    user_ip = request.remote_ip
+    Rails.logger.info "Weather request from IP: #{user_ip}"
     
-    # For now, use a hardcoded location
-    location = params[:location] || "Cape Town"
+    # Get weather data (service handles caching)
+    @weather_data = WeatherService.get_weather(user_ip)
     
-    @weather_data = WeatherService.get_weather(location)
+    # Allow manual override via URL parameter
+    if params[:location] && @weather_data[:success]
+      # Don't cache manual lookups as frequently
+      manual_data = WeatherService.get_weather(params[:location])
+      @weather_data = manual_data if manual_data[:success]
+    end
     
-    puts "DEBUG: Weather data ready: #{@weather_data[:success]}"
-    puts "DEBUG: Combined keys: #{@weather_data.keys}"
+    # Set page title
+    @page_title = @weather_data[:success] ? 
+                  "Weather in #{@weather_data[:location]}" : 
+                  "Weather Info"
   end
 end
