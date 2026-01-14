@@ -1,15 +1,13 @@
-<div id="<%= dom_id task %>">
+<div class="card-panel shadow p-5 rounded-4 mb-2" id="<%= dom_id task %>">
 
-  <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title"><%= task.title %></h5>
-      <h6 class="card-subtitle mb-2 text-muted"></h6>
+      <br/>
       <p class="card-text"><%= task.description %></p>
       <br/>
       <h6 class="card-subtitle mb-2 text-muted">Completed: <%= task.completed %></h6>
       <%= link_to "Complete", root_path, class: "nav-link" %>
       <a href="#" class="card-link">Remove</a>
     </div>
-  </div>
 
 </div>
