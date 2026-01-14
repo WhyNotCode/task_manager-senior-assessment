@@ -1,0 +1,29 @@
+
+<h1>Weather Information</h1>
+
+<% if @weather_data[:success] %>
+  <div class="weather-card">
+    <h2><%= @weather_data[:location] %></h2>
+    
+    <% if @weather_data[:icon] %>
+      <img src="<%= @weather_data[:icon] %>" alt="Weather icon">
+    <% end %>
+    
+    <div class="temperature">
+      <span class="temp-c"><%= @weather_data[:temp_c] %>°C</span>
+      <small>(<%= @weather_data[:temp_c] %>°C)</small>
+    </div>
+    
+    <p class="condition"><%= @weather_data[:condition] %></p>
+    
+  </div>
+<% else %>
+  <div class="alert alert-danger">
+    <h3>Error Loading Weather</h3>
+    <p><%= @weather_data[:error] %></p>
+  </div>
+<% end %>
+
+<%= @weather_data.to_json %>
+
+<%= link_to "Back to Tasks", root_path, class: "btn btn-secondary mt-4" %>
