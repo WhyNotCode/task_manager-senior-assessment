@@ -7,7 +7,14 @@
       <br/>
       <h6 class="card-subtitle mb-2 text-muted">Completed: <%= task.completed %></h6>
       <%= link_to "Complete", root_path, class: "nav-link" %>
-      <a href="#" class="card-link">Remove</a>
+      <div class="mt-2">
+        <%= link_to "Edit", edit_task_path(task), class: "btn btn-sm btn-outline-secondary me-1" %>
+        <%= link_to "Show", task, class: "btn btn-sm btn-outline-primary me-1" %>
+        <%= link_to "Delete", task, 
+            method: :delete, 
+            data: { confirm: "Are you sure?" }, 
+            class: "btn btn-sm btn-outline-danger" %>
+      </div>
     </div>
 
 </div>

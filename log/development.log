@@ -1342,3 +1342,821 @@ Processing by TasksController#show as HTML
 Completed 200 OK in 13ms (Views: 8.2ms | ActiveRecord: 0.5ms | Allocations: 1917)
 
 
+Started GET "/" for 127.0.0.1 at 2026-01-14 01:58:19 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  Rendered tasks/index.html.erb within layouts/application (Duration: 6.9ms | Allocations: 2005)
+  Rendered layout layouts/application.html.erb (Duration: 7.3ms | Allocations: 2093)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.0ms | Allocations: 3645)
+
+
+  
+ActionView::Template::Error (undefined method `count' for nil):
+     7:   <div class="col-md-6">
+     8:     <div class="card">
+     9:       <div class="card-header bg-warning text-white">
+    10:         <h3 class="card-title mb-0">📝 Incomplete Tasks (<%= @incomplete_tasks.count %>)</h3>
+    11:       </div>
+    12:       <div class="card-body">
+    13:         <div id="incomplete-tasks">
+  
+app/views/tasks/index.html.erb:10
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 01:58:19 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:01:23 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:10
+  [1m[36mTask Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:14
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:15
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:55
+  [1m[36mTask Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:59
+  [1m[36mTask Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:113
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:117
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:121
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:126
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:126
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:126
+  Rendered tasks/index.html.erb within layouts/application (Duration: 24.4ms | Allocations: 6481)
+  Rendered layouts/_navbar.html.erb (Duration: 0.8ms | Allocations: 189)
+  Rendered layout layouts/application.html.erb (Duration: 28.9ms | Allocations: 9222)
+Completed 200 OK in 59ms (Views: 27.1ms | ActiveRecord: 11.6ms | Allocations: 17267)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:01:24 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started PATCH "/tasks/3" for 127.0.0.1 at 2026-01-14 02:01:37 +0200
+Processing by TasksController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "task"=>{"completed"=>"1"}, "id"=>"3"}
+  [1m[36mTask Load (1.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:77:in `set_task'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:43:in `block in update'
+  [1m[36mTask Update (4.0ms)[0m  [1m[33mUPDATE "tasks" SET "completed" = $1, "updated_at" = $2 WHERE "tasks"."id" = $3[0m  [["completed", true], ["updated_at", "2026-01-14 00:01:37.551611"], ["id", 3]]
+  ↳ app/controllers/tasks_controller.rb:43:in `block in update'
+  [1m[36mTRANSACTION (12.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:43:in `block in update'
+Redirected to http://127.0.0.1:3000/tasks/3
+Completed 303 See Other in 35ms (ActiveRecord: 17.5ms | Allocations: 3227)
+
+
+Started GET "/tasks/3" for 127.0.0.1 at 2026-01-14 02:01:37 +0200
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:77:in `set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/_task.html.erb (Duration: 2.1ms | Allocations: 231)
+  Rendered tasks/show.html.erb within layouts/application (Duration: 7.6ms | Allocations: 979)
+  Rendered layouts/_navbar.html.erb (Duration: 0.2ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 10.4ms | Allocations: 1511)
+Completed 200 OK in 16ms (Views: 11.4ms | ActiveRecord: 0.6ms | Allocations: 2241)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:01:37 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:01:42 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:01:42 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started PATCH "/tasks/2" for 127.0.0.1 at 2026-01-14 02:01:48 +0200
+Processing by TasksController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "task"=>{"completed"=>"1"}, "id"=>"2"}
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:77:in `set_task'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:43:in `block in update'
+  [1m[36mTask Update (4.1ms)[0m  [1m[33mUPDATE "tasks" SET "completed" = $1, "updated_at" = $2 WHERE "tasks"."id" = $3[0m  [["completed", true], ["updated_at", "2026-01-14 00:01:48.514181"], ["id", 2]]
+  ↳ app/controllers/tasks_controller.rb:43:in `block in update'
+  [1m[36mTRANSACTION (12.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:43:in `block in update'
+Redirected to http://127.0.0.1:3000/tasks/2
+Completed 303 See Other in 31ms (ActiveRecord: 17.3ms | Allocations: 2296)
+
+
+Started GET "/tasks/2" for 127.0.0.1 at 2026-01-14 02:01:48 +0200
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:77:in `set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/_task.html.erb (Duration: 0.5ms | Allocations: 53)
+  Rendered tasks/show.html.erb within layouts/application (Duration: 3.1ms | Allocations: 503)
+  Rendered layouts/_navbar.html.erb (Duration: 0.2ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | Allocations: 1035)
+Completed 200 OK in 10ms (Views: 5.5ms | ActiveRecord: 0.7ms | Allocations: 1674)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:01:48 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:01:52 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:01:52 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:03:30 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:10
+  [1m[36mTask Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:14
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:15
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:55
+  [1m[36mTask Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:59
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:60
+  [1m[36mTask Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:113
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:117
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:121
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:126
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:126
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:126
+  Rendered tasks/index.html.erb within layouts/application (Duration: 34.3ms | Allocations: 6635)
+  Rendered layouts/_navbar.html.erb (Duration: 1.2ms | Allocations: 183)
+  Rendered layout layouts/application.html.erb (Duration: 43.2ms | Allocations: 9356)
+Completed 200 OK in 64ms (Views: 42.1ms | ActiveRecord: 11.2ms | Allocations: 14128)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:03:30 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tasks/1" for 127.0.0.1 at 2026-01-14 02:04:04 +0200
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:77:in `set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/_task.html.erb (Duration: 1.7ms | Allocations: 222)
+  Rendered tasks/show.html.erb within layouts/application (Duration: 6.4ms | Allocations: 932)
+  Rendered layouts/_navbar.html.erb (Duration: 0.3ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 1464)
+Completed 200 OK in 16ms (Views: 10.2ms | ActiveRecord: 0.6ms | Allocations: 2774)
+
+
+Started GET "/tasks/1/edit" for 127.0.0.1 at 2026-01-14 02:04:09 +0200
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:77:in `set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 6.0ms | Allocations: 1317)
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 9.2ms | Allocations: 1623)
+  Rendered layouts/_navbar.html.erb (Duration: 0.2ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | Allocations: 2155)
+Completed 200 OK in 17ms (Views: 11.8ms | ActiveRecord: 0.6ms | Allocations: 2857)
+
+
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:05:44 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:10
+  [1m[36mTask Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:14
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:15
+  [1m[36mTask Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:55
+  [1m[36mTask Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:59
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:60
+  [1m[36mTask Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:113
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:117
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:121
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:126
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:126
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:126
+  Rendered tasks/index.html.erb within layouts/application (Duration: 20.2ms | Allocations: 6649)
+  Rendered layouts/_navbar.html.erb (Duration: 0.7ms | Allocations: 183)
+  Rendered layout layouts/application.html.erb (Duration: 24.8ms | Allocations: 9370)
+Completed 200 OK in 45ms (Views: 23.8ms | ActiveRecord: 8.5ms | Allocations: 14115)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:05:44 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:08:29 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:11
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:15
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:19
+  [1m[36mCACHE Task Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:24
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:24
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:24
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:45
+  [1m[36mTask Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:49
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:90
+  [1m[36mTask Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:94
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:95
+  Rendered tasks/index.html.erb within layouts/application (Duration: 42.3ms | Allocations: 6639)
+  Rendered layouts/_navbar.html.erb (Duration: 1.6ms | Allocations: 183)
+  Rendered layout layouts/application.html.erb (Duration: 54.4ms | Allocations: 9362)
+Completed 200 OK in 82ms (Views: 52.0ms | ActiveRecord: 13.0ms | Allocations: 14112)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:08:29 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:08:56 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:91
+  [1m[36mTask Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:95
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:96
+  Rendered tasks/index.html.erb within layouts/application (Duration: 25.6ms | Allocations: 6640)
+  Rendered layouts/_navbar.html.erb (Duration: 0.9ms | Allocations: 183)
+  Rendered layout layouts/application.html.erb (Duration: 30.8ms | Allocations: 9361)
+Completed 200 OK in 51ms (Views: 29.4ms | ActiveRecord: 8.0ms | Allocations: 14106)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:08:56 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:09:07 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:91
+  [1m[36mTask Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:95
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:96
+  Rendered tasks/index.html.erb within layouts/application (Duration: 49.6ms | Allocations: 6650)
+  Rendered layouts/_navbar.html.erb (Duration: 1.3ms | Allocations: 183)
+  Rendered layout layouts/application.html.erb (Duration: 61.0ms | Allocations: 9374)
+Completed 200 OK in 89ms (Views: 60.2ms | ActiveRecord: 12.0ms | Allocations: 14121)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:09:08 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:09:25 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:91
+  [1m[36mTask Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:95
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:96
+  Rendered tasks/index.html.erb within layouts/application (Duration: 30.2ms | Allocations: 6630)
+  Rendered layouts/_navbar.html.erb (Duration: 0.9ms | Allocations: 183)
+  Rendered layout layouts/application.html.erb (Duration: 35.3ms | Allocations: 9351)
+Completed 200 OK in 55ms (Views: 33.8ms | ActiveRecord: 9.2ms | Allocations: 14098)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:09:26 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:09:46 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:91
+  [1m[36mTask Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:95
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:96
+  Rendered tasks/index.html.erb within layouts/application (Duration: 39.5ms | Allocations: 6617)
+  Rendered layouts/_navbar.html.erb (Duration: 1.1ms | Allocations: 184)
+  Rendered layout layouts/application.html.erb (Duration: 45.1ms | Allocations: 9342)
+Completed 200 OK in 67ms (Views: 35.4ms | ActiveRecord: 17.2ms | Allocations: 14089)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:09:46 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:10:32 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:91
+  [1m[36mTask Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:95
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:96
+  Rendered tasks/index.html.erb within layouts/application (Duration: 33.2ms | Allocations: 6643)
+  Rendered layouts/_navbar.html.erb (Duration: 1.4ms | Allocations: 183)
+  Rendered layout layouts/application.html.erb (Duration: 41.3ms | Allocations: 9364)
+Completed 200 OK in 69ms (Views: 40.9ms | ActiveRecord: 10.2ms | Allocations: 14109)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:10:32 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tasks/1/edit" for 127.0.0.1 at 2026-01-14 02:10:48 +0200
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:77:in `set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 6.8ms | Allocations: 1313)
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 9.9ms | Allocations: 1620)
+  Rendered layouts/_navbar.html.erb (Duration: 0.3ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 12.8ms | Allocations: 2152)
+Completed 200 OK in 20ms (Views: 13.8ms | ActiveRecord: 0.5ms | Allocations: 3435)
+
+
+Started GET "/tasks/1" for 127.0.0.1 at 2026-01-14 02:10:55 +0200
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:77:in `set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/_task.html.erb (Duration: 1.8ms | Allocations: 222)
+  Rendered tasks/show.html.erb within layouts/application (Duration: 6.7ms | Allocations: 928)
+  Rendered layouts/_navbar.html.erb (Duration: 0.2ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 8.3ms | Allocations: 1460)
+Completed 200 OK in 16ms (Views: 9.5ms | ActiveRecord: 0.8ms | Allocations: 2189)
+
+
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:13:48 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:91
+  [1m[36mTask Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:95
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:96
+  Rendered tasks/index.html.erb within layouts/application (Duration: 22.3ms | Allocations: 6628)
+  Rendered layouts/_navbar.html.erb (Duration: 1.1ms | Allocations: 183)
+  Rendered layout layouts/application.html.erb (Duration: 28.8ms | Allocations: 9349)
+Completed 200 OK in 44ms (Views: 27.5ms | ActiveRecord: 7.1ms | Allocations: 14099)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:13:48 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:15:46 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:91
+  [1m[36mTask Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:95
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:96
+  Rendered tasks/_task.html.erb (Duration: 1.4ms | Allocations: 213)
+  Rendered tasks/_task.html.erb (Duration: 0.1ms | Allocations: 38)
+  Rendered tasks/index.html.erb within layouts/application (Duration: 38.3ms | Allocations: 7003)
+  Rendered layouts/_navbar.html.erb (Duration: 1.3ms | Allocations: 179)
+  Rendered layout layouts/application.html.erb (Duration: 45.3ms | Allocations: 9718)
+Completed 200 OK in 64ms (Views: 43.2ms | ActiveRecord: 9.3ms | Allocations: 14465)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:15:46 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:16:53 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:91
+  [1m[36mTask Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:95
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:96
+  Rendered tasks/_task.html.erb (Duration: 1.0ms | Allocations: 211)
+  Rendered tasks/_task.html.erb (Duration: 0.1ms | Allocations: 38)
+  Rendered tasks/index.html.erb within layouts/application (Duration: 20.5ms | Allocations: 6341)
+  Rendered layouts/_navbar.html.erb (Duration: 1.0ms | Allocations: 179)
+  Rendered layout layouts/application.html.erb (Duration: 25.3ms | Allocations: 9055)
+Completed 200 OK in 42ms (Views: 24.3ms | ActiveRecord: 7.5ms | Allocations: 13800)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:16:53 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:18:29 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  Rendered tasks/_task.html.erb (Duration: 1.4ms | Allocations: 224)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:66
+  [1m[36mTask Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:70
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:71
+  Rendered tasks/_task.html.erb (Duration: 0.2ms | Allocations: 38)
+  Rendered tasks/_task.html.erb (Duration: 0.1ms | Allocations: 38)
+  Rendered tasks/index.html.erb within layouts/application (Duration: 27.3ms | Allocations: 5873)
+  Rendered layouts/_navbar.html.erb (Duration: 1.0ms | Allocations: 179)
+  Rendered layout layouts/application.html.erb (Duration: 34.5ms | Allocations: 8602)
+Completed 200 OK in 55ms (Views: 34.4ms | ActiveRecord: 7.0ms | Allocations: 13349)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:18:29 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/tasks" for 127.0.0.1 at 2026-01-14 02:19:38 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  Rendered tasks/_task.html.erb (Duration: 0.4ms | Allocations: 38)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:66
+  [1m[36mTask Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:70
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:71
+  Rendered tasks/_task.html.erb (Duration: 0.4ms | Allocations: 38)
+  Rendered tasks/_task.html.erb (Duration: 0.2ms | Allocations: 38)
+  Rendered tasks/index.html.erb within layouts/application (Duration: 43.6ms | Allocations: 4926)
+  Rendered layouts/_navbar.html.erb (Duration: 0.2ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 45.2ms | Allocations: 5463)
+Completed 200 OK in 48ms (Views: 40.8ms | ActiveRecord: 5.2ms | Allocations: 5878)
+
+
+Started GET "/tasks/1/edit" for 127.0.0.1 at 2026-01-14 02:19:48 +0200
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:77:in `set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 10.2ms | Allocations: 1348)
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 13.8ms | Allocations: 1660)
+  Rendered layouts/_navbar.html.erb (Duration: 0.4ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 17.5ms | Allocations: 2192)
+Completed 200 OK in 25ms (Views: 18.8ms | ActiveRecord: 0.4ms | Allocations: 3476)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 02:19:48 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:21:42 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  Rendered tasks/_task.html.erb (Duration: 1.7ms | Allocations: 386)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:66
+  [1m[36mTask Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:70
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:71
+  Rendered tasks/_task.html.erb (Duration: 0.7ms | Allocations: 130)
+  Rendered tasks/_task.html.erb (Duration: 0.5ms | Allocations: 130)
+  Rendered tasks/index.html.erb within layouts/application (Duration: 30.9ms | Allocations: 6200)
+  Rendered layouts/_navbar.html.erb (Duration: 1.0ms | Allocations: 179)
+  Rendered layout layouts/application.html.erb (Duration: 39.3ms | Allocations: 8930)
+Completed 200 OK in 61ms (Views: 37.4ms | ActiveRecord: 9.3ms | Allocations: 13680)
+
+
+Started GET "/tasks/1" for 127.0.0.1 at 2026-01-14 02:21:48 +0200
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:77:in `set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/_task.html.erb (Duration: 0.9ms | Allocations: 144)
+  Rendered tasks/show.html.erb within layouts/application (Duration: 5.0ms | Allocations: 749)
+  Rendered layouts/_navbar.html.erb (Duration: 0.3ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 7.4ms | Allocations: 1281)
+Completed 200 OK in 16ms (Views: 8.6ms | ActiveRecord: 0.5ms | Allocations: 2592)
+
+
+Started GET "/tasks/1/edit" for 127.0.0.1 at 2026-01-14 02:22:03 +0200
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:77:in `set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 9.7ms | Allocations: 1341)
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 14.0ms | Allocations: 1647)
+  Rendered layouts/_navbar.html.erb (Duration: 0.2ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 16.6ms | Allocations: 2180)
+Completed 200 OK in 24ms (Views: 18.0ms | ActiveRecord: 0.5ms | Allocations: 2883)
+
+
+Started GET "/" for 127.0.0.1 at 2026-01-14 02:25:29 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  Rendered tasks/_task.html.erb (Duration: 1.3ms | Allocations: 130)
+  [1m[36mCACHE Task Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:66
+  [1m[36mTask Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:70
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:71
+  Rendered tasks/_task.html.erb (Duration: 1.1ms | Allocations: 130)
+  Rendered tasks/_task.html.erb (Duration: 1.1ms | Allocations: 130)
+  Rendered tasks/index.html.erb within layouts/application (Duration: 55.5ms | Allocations: 5202)
+  Rendered layouts/_navbar.html.erb (Duration: 0.3ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 58.8ms | Allocations: 5739)
+Completed 200 OK in 61ms (Views: 52.3ms | ActiveRecord: 7.5ms | Allocations: 6151)
+
+
