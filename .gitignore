@@ -65,3 +65,5 @@ yarn-debug.log*
 
 # Ignore Byebug command history file.
 .byebug_history
+*.log
+

@@ -2160,3 +2160,287 @@ Processing by TasksController#index as HTML
 Completed 200 OK in 61ms (Views: 52.3ms | ActiveRecord: 7.5ms | Allocations: 6151)
 
 
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:28:14 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WeatherController#index as HTML
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms | Allocations: 1498)
+
+
+  
+NameError (uninitialized constant Net::HTTP):
+  
+app/services/weather_service.rb:9:in `get_weather'
+app/controllers/weather_controller.rb:10:in `index'
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:32:37 +0200
+Processing by WeatherController#index as HTML
+Completed 500 Internal Server Error in 736ms (ActiveRecord: 0.0ms | Allocations: 26994)
+
+
+  
+NoMethodError (undefined method `[]' for nil):
+  
+app/controllers/weather_controller.rb:12:in `index'
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 03:33:33 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:33:40 +0200
+Processing by WeatherController#index as HTML
+Completed 500 Internal Server Error in 464ms (ActiveRecord: 0.0ms | Allocations: 1259)
+
+
+  
+NoMethodError (undefined method `[]' for nil):
+  
+app/controllers/weather_controller.rb:12:in `index'
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 03:33:41 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:36:22 +0200
+Processing by WeatherController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering weather/index.html.erb within layouts/application
+  Rendered weather/index.html.erb within layouts/application (Duration: 2.6ms | Allocations: 578)
+  Rendered layouts/_navbar.html.erb (Duration: 0.8ms | Allocations: 189)
+  Rendered layout layouts/application.html.erb (Duration: 10.5ms | Allocations: 3721)
+Completed 200 OK in 467ms (Views: 13.7ms | ActiveRecord: 0.0ms | Allocations: 5641)
+
+
+Started GET "/" for 127.0.0.1 at 2026-01-14 03:36:36 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  Rendered tasks/_task.html.erb (Duration: 1.4ms | Allocations: 461)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:66
+  [1m[36mTask Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:70
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:71
+  Rendered tasks/_task.html.erb (Duration: 0.4ms | Allocations: 131)
+  Rendered tasks/_task.html.erb (Duration: 0.2ms | Allocations: 130)
+  Rendered tasks/index.html.erb within layouts/application (Duration: 22.8ms | Allocations: 7992)
+  Rendered layouts/_navbar.html.erb (Duration: 0.1ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 24.0ms | Allocations: 8543)
+Completed 200 OK in 97ms (Views: 21.0ms | ActiveRecord: 20.3ms | Allocations: 24579)
+
+
+Started GET "/" for 127.0.0.1 at 2026-01-14 03:37:20 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  Rendered tasks/_task.html.erb (Duration: 0.5ms | Allocations: 130)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:66
+  [1m[36mTask Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:70
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:71
+  Rendered tasks/_task.html.erb (Duration: 0.5ms | Allocations: 130)
+  Rendered tasks/_task.html.erb (Duration: 0.3ms | Allocations: 130)
+  Rendered tasks/index.html.erb within layouts/application (Duration: 18.5ms | Allocations: 5240)
+  Rendered layouts/_navbar.html.erb (Duration: 0.1ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 19.9ms | Allocations: 5777)
+Completed 200 OK in 22ms (Views: 17.1ms | ActiveRecord: 3.4ms | Allocations: 6200)
+
+
+Started GET "/" for 127.0.0.1 at 2026-01-14 03:37:21 +0200
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:12
+  [1m[36mTask Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:16
+  [1m[36mTask Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:20
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:46
+  [1m[36mTask Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", false], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:50
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["completed", false]]
+  ↳ app/views/tasks/index.html.erb:51
+  Rendered tasks/_task.html.erb (Duration: 0.7ms | Allocations: 130)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks" WHERE "tasks"."completed" = $1[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:66
+  [1m[36mTask Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" WHERE "tasks"."completed" = $1 LIMIT $2[0m  [["completed", true], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:70
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."completed" = $1 ORDER BY "tasks"."updated_at" DESC[0m  [["completed", true]]
+  ↳ app/views/tasks/index.html.erb:71
+  Rendered tasks/_task.html.erb (Duration: 1.7ms | Allocations: 130)
+  Rendered tasks/_task.html.erb (Duration: 0.3ms | Allocations: 130)
+  Rendered tasks/index.html.erb within layouts/application (Duration: 40.8ms | Allocations: 5206)
+  Rendered layouts/_navbar.html.erb (Duration: 0.1ms | Allocations: 46)
+  Rendered layout layouts/application.html.erb (Duration: 43.4ms | Allocations: 5743)
+Completed 200 OK in 45ms (Views: 39.9ms | ActiveRecord: 4.1ms | Allocations: 6162)
+
+
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:37:34 +0200
+Processing by WeatherController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering weather/index.html.erb within layouts/application
+  Rendered weather/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 67)
+  Rendered layouts/_navbar.html.erb (Duration: 0.1ms | Allocations: 47)
+  Rendered layout layouts/application.html.erb (Duration: 7.7ms | Allocations: 801)
+Completed 200 OK in 5514ms (Views: 8.3ms | ActiveRecord: 0.0ms | Allocations: 1843)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 03:37:43 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:37:49 +0200
+Processing by WeatherController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering weather/index.html.erb within layouts/application
+  Rendered weather/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 67)
+  Rendered layouts/_navbar.html.erb (Duration: 0.1ms | Allocations: 47)
+  Rendered layout layouts/application.html.erb (Duration: 1.8ms | Allocations: 804)
+Completed 200 OK in 447ms (Views: 2.4ms | ActiveRecord: 0.0ms | Allocations: 1829)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 03:37:49 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:38:25 +0200
+Processing by WeatherController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering weather/index.html.erb within layouts/application
+  Rendered weather/index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 371)
+  Rendered layouts/_navbar.html.erb (Duration: 0.8ms | Allocations: 181)
+  Rendered layout layouts/application.html.erb (Duration: 6.9ms | Allocations: 3277)
+Completed 200 OK in 456ms (Views: 10.7ms | ActiveRecord: 0.0ms | Allocations: 5029)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 03:38:25 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:39:20 +0200
+Processing by WeatherController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering weather/index.html.erb within layouts/application
+  Rendered weather/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 365)
+  Rendered layouts/_navbar.html.erb (Duration: 0.6ms | Allocations: 181)
+  Rendered layout layouts/application.html.erb (Duration: 6.0ms | Allocations: 3288)
+Completed 200 OK in 457ms (Views: 8.3ms | ActiveRecord: 0.0ms | Allocations: 5033)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 03:39:21 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:39:43 +0200
+Processing by WeatherController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering weather/index.html.erb within layouts/application
+  Rendered weather/index.html.erb within layouts/application (Duration: 1.4ms | Allocations: 368)
+  Rendered layouts/_navbar.html.erb (Duration: 0.9ms | Allocations: 181)
+  Rendered layout layouts/application.html.erb (Duration: 6.7ms | Allocations: 3297)
+Completed 200 OK in 468ms (Views: 9.1ms | ActiveRecord: 0.0ms | Allocations: 5042)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 03:39:44 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:39:51 +0200
+Processing by WeatherController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering weather/index.html.erb within layouts/application
+  Rendered weather/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 56)
+  Rendered layouts/_navbar.html.erb (Duration: 0.2ms | Allocations: 47)
+  Rendered layout layouts/application.html.erb (Duration: 2.3ms | Allocations: 763)
+Completed 200 OK in 398ms (Views: 3.1ms | ActiveRecord: 0.0ms | Allocations: 1788)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 03:39:51 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:40:23 +0200
+Processing by WeatherController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering weather/index.html.erb within layouts/application
+  Rendered weather/index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 366)
+  Rendered layouts/_navbar.html.erb (Duration: 1.2ms | Allocations: 181)
+  Rendered layout layouts/application.html.erb (Duration: 11.0ms | Allocations: 3301)
+Completed 200 OK in 509ms (Views: 14.2ms | ActiveRecord: 0.0ms | Allocations: 5051)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 03:40:23 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:40:32 +0200
+Processing by WeatherController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering weather/index.html.erb within layouts/application
+  Rendered weather/index.html.erb within layouts/application (Duration: 3.8ms | Allocations: 366)
+  Rendered layouts/_navbar.html.erb (Duration: 0.9ms | Allocations: 181)
+  Rendered layout layouts/application.html.erb (Duration: 9.8ms | Allocations: 3286)
+Completed 200 OK in 428ms (Views: 15.1ms | ActiveRecord: 0.0ms | Allocations: 5031)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 03:40:32 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/weather" for 127.0.0.1 at 2026-01-14 03:40:56 +0200
+Processing by WeatherController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering weather/index.html.erb within layouts/application
+  Rendered weather/index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 364)
+  Rendered layouts/_navbar.html.erb (Duration: 1.3ms | Allocations: 181)
+  Rendered layout layouts/application.html.erb (Duration: 11.1ms | Allocations: 3272)
+Completed 200 OK in 429ms (Views: 14.4ms | ActiveRecord: 0.0ms | Allocations: 5016)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2026-01-14 03:40:57 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
