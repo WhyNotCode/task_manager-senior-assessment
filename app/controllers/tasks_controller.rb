@@ -3,9 +3,12 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(created_at: :desc)
+    @completed_tasks = Task.completed.order(updated_at: :desc)
+    @incomplete_tasks = Task.incomplete.order(created_at: :desc)
+    @task = Task.new
   end
-
+  
   # GET /tasks/1 or /tasks/1.json
   def show
   end

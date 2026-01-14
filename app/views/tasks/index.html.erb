@@ -1,14 +1,83 @@
 <p style="color: green"><%= notice %></p>
-
 <h1>Tasks</h1>
 
-<div id="tasks">
-  <% @tasks.each do |task| %>
-    <%= render task %>
-    <p>
-      <%= link_to "Show this task", task, class: "btn btn-outline-primary mb-3" %>
-    </p>
-  <% end %>
+<!-- Show high level statistics of all the tasks -->
+<div class="row mt-4 mb-3">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"> Task Statistics</h5>
+        <div class="row text-center">
+          <div class="col-md-3">
+            <div class="display-6"><%= @tasks.count %></div>
+            <small>Total Tasks</small>
+          </div>
+          <div class="col-md-3">
+            <div class="display-6 text-success"><%= @completed_tasks.count %></div>
+            <small>Completed</small>
+          </div>
+          <div class="col-md-3">
+            <div class="display-6 text-warning"><%= @incomplete_tasks.count %></div>
+            <small>Incomplete</small>
+          </div>
+          <div class="col-md-3">
+            <div class="display-6 text-primary">
+              <%= @tasks.count > 0 ? (@completed_tasks.count.to_f / @tasks.count * 100).round : 0 %>%
+            </div>
+            <small>Completion Rate</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<%= link_to "New task", new_task_path %>
+
+<!-- New Task Button -->
+<div class="mt-4 text-center mb-3">
+  <%= link_to "Create New Task", new_task_path, class: "btn btn-primary btn-lg" %>
+</div>
+
+<div class="row mb-5">
+  <!-- Incomplete Tasks Column -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header bg-info text-white">
+        <h3 class="card-title mb-0">Incomplete Tasks (<%= @incomplete_tasks.count %>)</h3>
+      </div>
+      <div class="card-body">
+        <div id="incomplete-tasks">
+          <% if @incomplete_tasks.any? %>
+            <% @incomplete_tasks.each do |task| %>
+              <%= render task %>
+            <% end %>
+          <% else %>
+            <p class="text-muted text-center py-4">No incomplete tasks!</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Completed Tasks Column -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header bg-success text-white">
+        <h3 class="card-title mb-0">Completed Tasks (<%= @completed_tasks.count %>)</h3>
+      </div>
+      <div class="card-body">
+        <div id="completed-tasks">
+          <% if @completed_tasks.any? %>
+            <% @completed_tasks.each do |task| %>
+              <%= render task %>
+            <% end %>
+          <% else %>
+            <p class="text-muted text-center py-4">No completed tasks yet. Get to work!</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
