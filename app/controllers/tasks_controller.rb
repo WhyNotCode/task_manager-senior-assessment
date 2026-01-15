@@ -1,10 +1,11 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :toggle_complete]
+
 
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all.order(created_at: :desc)
-    @completed_tasks = Task.completed.order(updated_at: :desc)
+    @completed_tasks = Task.completed.order(completed_at: :desc)
     @incomplete_tasks = Task.incomplete.order(created_at: :desc)
     @task = Task.new
   end
@@ -53,9 +54,27 @@ class TasksController < ApplicationController
   # PATCH/PUT /task/1 or /task/1.json
   def complete
     respond_to do |format|
-      if @task.completed(true)
+      if @task.complete(true)
         format.html { redirect_to @task, notice: "Task was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @task }
+      end
+    end
+  end
+
+  def toggle_complete
+    if @task.completed?
+      @task.incomplete!
+    else
+      @task.complete!
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to tasks_path, notice: 'Task updated.' }
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace(@task, partial: 'tasks/task', locals: { task: @task }),
+          turbo_stream.update('task-stats', partial: 'tasks/stats')
+        ]
       end
     end
   end

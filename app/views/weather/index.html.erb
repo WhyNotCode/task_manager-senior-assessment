@@ -1,29 +1,207 @@
+<!-- Loading overlay (hidden by default) -->
+<div id="weather-loading" class="position-fixed top-0 start-0 w-100 h-100 d-none" style="background: rgba(255,255,255,0.8); z-index: 1050;">
+  <div class="position-absolute top-50 start-50 translate-middle text-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Loading weather...</span>
+    </div>
+    <p class="mt-3 text-muted">Fetching weather data...</p>
+  </div>
+</div>
 
-<h1>Weather Information</h1>
+<script>
+// Show loading spinner on refresh/clear cache
+document.addEventListener('turbo:before-fetch-request', function(event) {
+  const url = event.detail.url.toString();
+  if (url.includes('/weather/refresh')) {
+    document.getElementById('weather-loading').classList.remove('d-none');
+  }
+});
 
-<% if @weather_data[:success] %>
-  <div class="weather-card">
-    <h2><%= @weather_data[:location] %></h2>
-    
-    <% if @weather_data[:icon] %>
-      <img src="<%= @weather_data[:icon] %>" alt="Weather icon">
+document.addEventListener('turbo:before-fetch-response', function(event) {
+  const url = event.detail.url.toString();
+  if (url.includes('/weather/refresh')) {
+    document.getElementById('weather-loading').classList.add('d-none');
+  }
+});
+
+// Show spinner on manual search
+document.querySelector('form[action*="weather"]')?.addEventListener('submit', function() {
+  document.getElementById('weather-loading').classList.remove('d-none');
+});
+</script>
+
+
+
+
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h1 class="h3 mb-0"><%= @page_title %></h1>
+      <% if @weather_data[:last_updated] %>
+        <small class="text-muted">
+          Updated: <%= @weather_data[:last_updated] %>
+          <% if params[:location] %>
+            * Manual location: <%= params[:location] %>
+          <% end %>
+        </small>
+      <% end %>
+    </div>
+
+<div class="card-body">
+      <% if @weather_data[:success] %>
+        <!-- Show a success alert -->
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+          <i class="bi bi-check-circle-fill me-2"></i>
+          <div>
+            Weather data successfully loaded for <strong><%= @weather_data[:location] %></strong>
+            <% if @weather_data[:last_updated] %>
+              (Updated: <%= @weather_data[:last_updated] %>)
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="d-flex align-items-center mb-4">
+              <% if @weather_data[:icon] %>
+                <img src="<%= @weather_data[:icon] %>" 
+                     class="me-3" 
+                     alt="<%= @weather_data[:condition] %>"
+                     style="width: 64px; height: 64px;">
+              <% end %>
+              <div>
+                <h2 class="display-4 mb-0"><%= @weather_data[:temp_c] %>°C</h2>
+                <p class="lead mb-0"><%= @weather_data[:condition] %></p>
+                <small><%= @weather_data[:temp_f] %>°F</small>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="bi bi-sunrise text-warning"></i> Sun Times
+                </h5>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="text-center">
+                      <i class="bi bi-sunrise-fill display-6 text-warning"></i>
+                      <p class="mb-0"><strong>Sunrise:</strong></p>
+                      <p class="h5"><%= @weather_data[:sunrise] %></p>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="text-center">
+                      <i class="bi bi-sunset-fill display-6 text-orange"></i>
+                      <p class="mb-0"><strong>Sunset:</strong></p>
+                      <p class="h5"><%= @weather_data[:sunset] %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Details</h5>
+                <p><strong>Humidity:</strong> <%= @weather_data[:humidity] %>%</p>
+                <p><strong>Wind:</strong> <%= @weather_data[:wind_kph] %> km/h</p>
+                <p><strong>Location:</strong> <%= @weather_data[:location] %></p>
+                
+                <!-- Simple location search -->
+                <hr>
+                <div class="mt-3">
+                    <h6>Search different City</h6>
+                    <form method="get" action="<%= weather_path %>" class="mt-2">
+                        <div class="input-group">
+                            <input type="text" 
+                                    name="location" 
+                                    class="form-control" 
+                                    placeholder="Enter city name (e.g., Sandton, Witbank, Howick)"
+                                    value="<%= params[:location] %>"
+                                    aria-label="City name">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="bi bi-search"></i> Search
+                            </button>
+                        </div>
+                        
+                    </form>
+                    
+                    <% if @manual_search && @weather_data[:success] %>
+                        <div class="alert alert-info mt-2 p-2 small">
+                        Showing weather for <strong><%= params[:location] %></strong>. 
+                        <%= link_to "Show my location instead", weather_path, class: "alert-link" %>
+                        </div>
+                    <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% else %>
+      <!-- Error display -->
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          Unable to fetch weather
+        </h4>
+        
+        <% if @manual_search %>
+          <div class="alert alert-warning mt-2">
+            <strong>Search Issue:</strong> Could not find weather for "<%= params[:location] %>"
+          </div>
+          
+          <div class="alert alert-info mt-3">
+            <h5 class="alert-heading">Suggestions:</h5>
+            <ul class="mb-0">
+              <li>Check the spelling of the city name</li>
+              <li>Try including the country code (e.g., "London,UK")</li>
+              <li>Use a nearby major city</li>
+            </ul>
+          </div>
+        <% else %>
+          <div class="alert alert-secondary mt-2">
+            <p class="mb-0">
+              <i class="bi bi-info-circle me-1"></i>
+              Showing default location (Cape Town) instead.
+            </p>
+          </div>
+        <% end %>
+        
+        <hr>
+        <div class="d-flex gap-2">
+          <%= link_to "Try Default Location", weather_path, class: "btn btn-primary" %>
+          <% if @manual_search %>
+            <%= link_to "Try Again", weather_path(location: params[:location]), class: "btn btn-outline-primary" %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-    
-    <div class="temperature">
-      <span class="temp-c"><%= @weather_data[:temp_c] %>°C</span>
-      <small>(<%= @weather_data[:temp_c] %>°C)</small>
+
+    <!-- Cache status alert -->
+    <% if flash[:notice] %>
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="bi bi-info-circle me-2"></i>
+        <%= flash[:notice] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% end %>
     </div>
     
-    <p class="condition"><%= @weather_data[:condition] %></p>
-    
+    <div class="card-footer">
+      <div class="d-flex justify-content-between">
+        <%= link_to "Back to Tasks", root_path, class: "btn btn-secondary" %>
+        <div>
+          <%= link_to "Refresh", weather_path, class: "btn btn-outline-primary me-2" %>
+          <%= button_to "Clear Cache", weather_refresh_path(clear_all: true), 
+            method: :post, 
+            class: "btn btn-outline-warning",
+            form: { data: { confirm: "Clear ALL weather cache for ALL locations?" } } %>
+        </div>
+      </div>
+    </div>
   </div>
-<% else %>
-  <div class="alert alert-danger">
-    <h3>Error Loading Weather</h3>
-    <p><%= @weather_data[:error] %></p>
-  </div>
-<% end %>
+</div>
 
-<%= @weather_data.to_json %>
 
-<%= link_to "Back to Tasks", root_path, class: "btn btn-secondary mt-4" %>
+
