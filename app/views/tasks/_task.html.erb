@@ -2,33 +2,41 @@
   <div class="card-body">
     <div class="d-flex justify-content-between align-items-start">
       <div>
-        <h5 class="card-title mb-1">
+        <h5 class="card-title mb-1 d-flex align-items-center">
           <%= task.title %>
-          <% if task.completed? %>
-            <span class="badge bg-success ms-2">Completed</span>
-          <% end %>
         </h5>
         <% if task.description.present? %>
           <p class="card-text text-muted mb-2"><%= task.description %></p>
+        <% else %>
+          <p class="card-text text-muted mb-2">
+            <small><em>No description provided</em></small>
+          </p>
         <% end %>
         <small class="text-muted">
           Created: <%= task.created_at.strftime("%b %d, %Y") %>
           <% if task.completed? %>
-            • Completed: <%= task.completed_at.strftime("%b %d, %Y") %>
+            * Completed: <%= task.completed_at.strftime("%b %d, %Y") %>
           <% end %>
         </small>
       </div>
       
       <div class="btn-group" role="group">
         <!-- Toggle complete/incomplete -->
-        <%= link_to task.completed? ? "Mark Incomplete" : "Complete", 
-                    toggle_complete_task_path(task), 
+        <%= link_to toggle_complete_task_path(task), 
                     class: "btn btn-sm #{task.completed? ? 'btn-warning' : 'btn-success'}",
-                    data: { turbo_method: :patch } %>
+                    data: { turbo_method: :patch } do %>
+          <% if task.completed? %>
+            <i class="bi bi-arrow-counterclockwise me-1"></i>Mark Incomplete
+          <% else %>
+            <i class="bi bi-check-circle me-1"></i>Complete
+          <% end %>
+        <% end %>
         
         <!-- Edit button -->
-        <%= link_to "Edit", edit_task_path(task), 
-                    class: "btn btn-sm btn-outline-secondary ms-1" %>
+        <%= link_to edit_task_path(task), 
+                    class: "btn btn-sm btn-outline-secondary ms-1" do %>
+          <i class="bi bi-pencil me-1"></i>Edit
+        <% end %>
         
         <!-- Delete button -->
         <%= button_to "Delete", task, 

@@ -1,10 +1,25 @@
-<h1>Editing task</h1>
-
-<%= render "form", task: @task %>
-
-<br>
-
-<div>
-  <%= link_to "Show this task", @task %> |
-  <%= link_to "Back to tasks", tasks_path %>
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-warning text-dark">
+      <h1 class="h3 mb-0">
+        <i class="bi bi-pencil-square"></i> Edit Task
+      </h1>
+    </div>
+    
+    <div class="card-body">
+      <%= render "form", task: @task %>
+    </div>
+    
+    <div class="card-footer">
+      <div class="btn-group" role="group">
+        <%= link_to @task, class: "btn btn-outline-primary" do %>
+          <i class="bi bi-eye"></i> View Task
+        <% end %>
+        
+        <%= link_to tasks_path, class: "btn btn-outline-secondary" do %>
+          <i class="bi bi-arrow-left"></i> Back to Tasks
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
