@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root "tasks#index"
   resources :tasks
+  resources :tasks do
+    member do
+      patch :toggle_complete
+    end
+  end
   get "/weather", to: "weather#index"
   post "/weather/refresh", to: "weather#refresh", as: :weather_refresh
 

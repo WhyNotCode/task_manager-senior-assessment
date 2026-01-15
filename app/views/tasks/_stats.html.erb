@@ -1,0 +1,29 @@
+<div class="row mt-4 mb-3" id="task-stats">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"> Task Statistics</h5>
+        <div class="row text-center">
+          <div class="col-md-3">
+            <div class="display-6"><%= Task.count %></div>
+            <small>Total Tasks</small>
+          </div>
+          <div class="col-md-3">
+            <div class="display-6 text-success"><%= Task.completed.count %></div>
+            <small>Completed</small>
+          </div>
+          <div class="col-md-3">
+            <div class="display-6 text-warning"><%= Task.incomplete.count %></div>
+            <small>Incomplete</small>
+          </div>
+          <div class="col-md-3">
+            <div class="display-6 text-primary">
+              <%= Task.count > 0 ? (Task.completed.count.to_f / Task.count * 100).round : 0 %>%
+            </div>
+            <small>Completion Rate</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,8 +5,20 @@ require 'uri'
 
 class WeatherService
 
+  # Use credentials for API key stored in rails creds
   API_KEY = Rails.application.credentials.dig(:weatherapi, :api_key)
   BASE_URL = "http://api.weatherapi.com/v1"
+
+  # Fallback to ENV if credentials aren't set up yet
+  if API_KEY.blank? && ENV['WEATHER_API_KEY'].present?
+    API_KEY = ENV['WEATHER_API_KEY']
+  end
+
+  # Validate API key is present
+  if API_KEY.blank?
+    Rails.logger.warn "WeatherService: No API key found. Please set it in credentials or ENV."
+  end
+
 
   # get weather with caching
   def self.get_weather(ip_address = nil)
@@ -44,6 +56,13 @@ class WeatherService
 
   private
   
+  def self.build_uri(endpoint, query)
+    # handle spaces and special characters on the URI
+    encoded_query = URI.encode_www_form_component(query)
+    URI("#{BASE_URL}/#{endpoint}.json?key=#{API_KEY}&q=#{encoded_query}")
+  end
+
+
   def self.determine_location_query(ip_address)
     if ip_address && ip_address != "127.0.0.1" && ip_address != "::1"
       "auto:ip"
@@ -54,18 +73,26 @@ class WeatherService
 
   
   def self.fetch_weather_data(query)
+    # Check the API key is present
+    return { "error" => "API key not configured" } if API_KEY.blank?
+
     begin
-      response = Net::HTTP.get_response(
-        URI("#{BASE_URL}/current.json?key=#{API_KEY}&q=#{query}")
-      )
+      uri = build_uri("current", query)
+      response = Net::HTTP.get_response(uri)
       
       if response.is_a?(Net::HTTPSuccess)
         JSON.parse(response.body)
+      elsif response.code == "403"
+        { "error" => "Invalid API key or quota exceeded" }
       else
-        { "error" => "API returned #{response.code}" }
+        { "error" => "Weather API error: #{response.code}" }
       end
+    rescue SocketError => e
+      { "error" => "Network error: Unable to connect to weather service" }
+    rescue JSON::ParserError => e
+      { "error" => "Invalid response from weather service" }
     rescue => e
-      { "error" => e.message }
+      { "error" => "Unexpected error: #{e.message}" }
     end
   end
 
