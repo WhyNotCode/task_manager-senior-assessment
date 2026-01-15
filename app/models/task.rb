@@ -8,6 +8,19 @@ class Task < ApplicationRecord
   scope :completed, -> { where.not(completed_at: nil) }
   scope :incomplete, -> { where(completed_at: nil) }
 
+  def completed
+    completed_at.present?
+  end
+  
+  def completed=(value)
+    if value == "1" || value == true
+      self.completed_at ||= Time.current
+    else
+      self.completed_at = nil
+    end
+  end
+
+  
   # Helper methods
   def completed?
     completed_at.present?

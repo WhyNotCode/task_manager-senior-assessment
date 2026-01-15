@@ -32,7 +32,8 @@ class TasksController < ApplicationController
         format.html { redirect_to @task, notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { flash.now[:alert] = "Could not create task. Please check the errors below."
+                      render :new, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -42,53 +43,58 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: "Task was successfully updated.", status: :see_other }
+        format.html { redirect_to @task, notice: "Task '#{@task.title}' was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { flash.now[:alert] = "Could not update task. Please check the errors below."
+                      render :edit, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /task/1 or /task/1.json
-  def complete
-    respond_to do |format|
-      if @task.complete(true)
-        format.html { redirect_to @task, notice: "Task was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @task }
-      end
-    end
-  end
+  # def complete
+  #   respond_to do |format|
+  #     if @task.complete(true)
+  #       format.html { redirect_to @task, notice: "Task was successfully updated.", status: :see_other }
+  #       format.json { render :show, status: :ok, location: @task }
+  #     end
+  #   end
+  # end
 
   def toggle_complete
     if @task.completed?
       @task.incomplete!
+      notice_message = "Task '#{@task.title}' marked as incomplete."
     else
       @task.complete!
+      notice_message = "Task '#{@task.title}' marked as complete."
     end
     
     respond_to do |format|
-      format.html { redirect_to tasks_path, notice: 'Task updated.' }
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.replace(@task, partial: 'tasks/task', locals: { task: @task }),
-          turbo_stream.update('task-stats', partial: 'tasks/stats')
-        ]
-      end
+      format.html { redirect_to tasks_path, notice: notice_message }
     end
   end
 
 
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
-    @task.destroy!
+    task_title = @task.title
+    
+    begin
+      @task.destroy!
+      flash[:notice] = "Task '#{task_title}' was successfully destroyed."
+    rescue => e
+      flash[:alert] = "Could not delete task: #{e.message}"
+    end
 
     respond_to do |format|
-      format.html { redirect_to tasks_path, notice: "Task was successfully destroyed.", status: :see_other }
+      format.html { redirect_to tasks_path, status: :see_other }
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

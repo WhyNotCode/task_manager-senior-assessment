@@ -1,14 +1,11 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Task Manager</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="<%= root_path %>">Task Manager</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarMain">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <%= link_to "Home", root_path, class: "nav-link" %>
-        </li>
         <li class="nav-item">
           <%= link_to "Tasks", tasks_path, class: "nav-link" %>
         </li>
@@ -19,3 +16,24 @@
     </div>
   </div>
 </nav>
+
+<style>
+  .navbar {
+    background: linear-gradient(145deg, #3184d6, #103c68);
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.3),
+      0 6px 10px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-bottom: 3px solid rgba(52, 152, 219, 0.3);
+  }
+  
+  .nav-link {
+    margin: 0 5px;
+    border-radius: 4px;
+    transition: all 0.3s;
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+</style>

@@ -78,7 +78,7 @@ document.querySelector('form[action*="weather"]')?.addEventListener('submit', fu
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">
-                  <i class="bi bi-sunrise text-warning"></i> Sun Times
+                  <i class="bi bi-sunrise text-warning me-2"></i> Sun Times
                 </h5>
                 <div class="row">
                   <div class="col-6">
@@ -191,12 +191,13 @@ document.querySelector('form[action*="weather"]')?.addEventListener('submit', fu
     <div class="card-footer">
       <div class="d-flex justify-content-between">
         <%= link_to "Back to Tasks", root_path, class: "btn btn-secondary" %>
-        <div>
+        <div class="d-flex align-items-center">
           <%= link_to "Refresh", weather_path, class: "btn btn-outline-primary me-2" %>
           <%= button_to "Clear Cache", weather_refresh_path(clear_all: true), 
-            method: :post, 
-            class: "btn btn-outline-warning",
-            form: { data: { confirm: "Clear ALL weather cache for ALL locations?" } } %>
+              method: :post, 
+              class: "btn btn-outline-warning",
+              form_class: "d-inline m-0",
+              form: { data: { confirm: "Clear ALL weather cache for ALL locations?" } } %>
         </div>
       </div>
     </div>
