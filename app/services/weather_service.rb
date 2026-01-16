@@ -31,11 +31,11 @@ class WeatherService
     cached_data = Rails.cache.read(cache_key)
     
     if cached_data
-      puts "DEBUG: Cache hit for #{cache_key}"
+      Rails.logger.debug "DEBUG: Cache hit for #{cache_key}"
       return cached_data
     end
     
-    puts "DEBUG: Cache miss for #{cache_key}, fetching from API"
+    Rails.logger.debug "DEBUG: Cache miss for #{cache_key}, fetching from API"
 
 
     # Fetch from API
@@ -56,19 +56,49 @@ class WeatherService
 
   private
   
+
+
+  def self.determine_location_query(query)
+    return "Cape Town" if query.nil? || query.to_s.strip.empty?
+
+    # Convert to string for safe comparison
+    query_str = query.to_s
+
+    # First check if it's an IP address
+    if is_ip_address?(query_str)
+      if query_str == "127.0.0.1" || query_str == "::1"
+        # Localhost - use default
+        "Cape Town"
+      else
+        # Real IP - auto detect
+        "auto:ip"
+      end
+    else
+      # Not an IP - use the query as-is (for manual searches)
+      query_str.strip
+    end
+  end
+
+  def self.is_ip_address?(str)
+    return false if str.nil? || str.empty?
+    
+    # Check for IPv4
+    if str.match?(/\A(?:[0-9]{1,3}\.){3}[0-9]{1,3}\z/)
+      # Validate each octet is 0-255
+      octets = str.split('.').map(&:to_i)
+      return octets.all? { |octet| octet >= 0 && octet <= 255 }
+    end
+
+    # Check for IPv6
+    return true if str.match?(/\A([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}\z/)
+    return true if str == "::1"
+    false
+  end
+
   def self.build_uri(endpoint, query)
     # handle spaces and special characters on the URI
     encoded_query = URI.encode_www_form_component(query)
     URI("#{BASE_URL}/#{endpoint}.json?key=#{API_KEY}&q=#{encoded_query}")
-  end
-
-
-  def self.determine_location_query(ip_address)
-    if ip_address && ip_address != "127.0.0.1" && ip_address != "::1"
-      "auto:ip"
-    else
-      "Cape Town"  # Fallback 
-    end
   end
 
   

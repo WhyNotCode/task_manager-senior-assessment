@@ -1,3 +1,17 @@
+#== Schema Information
+# Table name: tasks
+#  id            :bigint           not null, primary key
+#  title         :string           not null
+#  description   :text
+#  completed_at  :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null       
+
+# I realised that using a 'completed' boolean field can lead to data inconsistency.
+# Instead, I use 'completed_at' datetime field to track when a task was completed. 
+# It is also more informative as it tells us when the task was completed.
+
+
 class Task < ApplicationRecord
   # Validations
   validates :title, presence: true
@@ -20,6 +34,10 @@ class Task < ApplicationRecord
     end
   end
 
+  def self.completion_percentage
+    return 0 if none?
+    (completed.count.to_f / count * 100).round
+  end
   
   # Helper methods
   def completed?
