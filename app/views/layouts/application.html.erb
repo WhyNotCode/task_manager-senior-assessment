@@ -1,22 +1,109 @@
+
+
+
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Task Manager</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    
-    <%# FIXED: Use stylesheet_link_tag with the right path %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    
-    <%= javascript_importmap_tags %>
-  </head>
+<html lang="en" data-bs-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task Manager</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
   
-  <body>
-    <div class="container mt-4">
-      <%= render 'layouts/navbar' =%>
+  <!-- Bootstrap CSS with dark mode support -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+<body class="min-vh-100 d-flex flex-column">
+  <!-- Dark/light mode detector script -->
+  <script>
+    // Auto detect system theme
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       
+      const getPreferredTheme = () => {
+        if (storedTheme) {
+          return storedTheme;
+        }
+        return prefersDark ? 'dark' : 'light';
+      };
+      
+      const setTheme = (theme) => {
+        document.documentElement.setAttribute('data-bs-theme', theme);
+      };
+      
+      setTheme(getPreferredTheme());
+      
+      // Theme toggle button (optional)
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+          const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+          localStorage.setItem('theme', newTheme);
+          setTheme(newTheme);
+        });
+      }
+    })();
+  </script>
+
+  <!-- Updated Navbar with theme toggle -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="<%= root_path %>">
+        <i class="bi bi-check2-square me-2"></i>
+        Task Manager
+      </a>
+      
+      <!-- Mobile toggle button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <%= link_to tasks_path, class: "nav-link #{'active' if current_page?(tasks_path)}" do %>
+              <i class="bi bi-list-task"></i> Tasks
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to weather_path, class: "nav-link #{'active' if current_page?(weather_path)}" do %>
+              <i class="bi bi-cloud-sun"></i> Weather
+            <% end %>
+          </li>
+        </ul>
+        
+        <!-- Theme toggle button (optional) -->
+        <button class="btn btn-outline-light btn-sm" id="theme-toggle" title="Toggle theme">
+          <i class="bi bi-moon-stars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main class="flex-grow-1 py-4">
+    <div class="container">
       <%= yield %>
     </div>
-  </body>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-body-tertiary py-3 mt-4 border-top">
+    <div class="container text-center">
+      <small class="text-body-secondary">
+        Task Manager &copy; Basil Dlamini
+      </small>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

@@ -1,28 +1,29 @@
-<div id="task-stats">
-  <div class="row mt-4 mb-3">
-    <div class="col-12">
-      <div class="card border-primary">
-        <div class="card-body bg-success bg-opacity-10">
-          <h5 class="card-title"> Task Statistics</h5>
-          <div class="row text-center">
-            <div class="col-md-3">
-              <div class="display-6"><%= @tasks.count %></div>
-              <small>Total Tasks</small>
+<div class="row mt-3 mt-md-4 mb-3">
+  <div class="col-12">
+    <div class="card border-success">
+      <div class="card-body bg-success bg-opacity-10">
+        <h5 class="card-title text-success">
+          <i class="bi bi-bar-chart-fill me-2"></i>Task Statistics
+        </h5>
+        <div class="row text-center">
+          <!-- Responsive grid: full width on mobile, 4 columns on desktop -->
+          <div class="col-6 col-md-3 mb-3 mb-md-0">
+            <div class="display-6 display-md-4 text-primary"><%= @tasks.count %></div>
+            <small class="text-muted">Total Tasks</small>
+          </div>
+          <div class="col-6 col-md-3 mb-3 mb-md-0">
+            <div class="display-6 display-md-4 text-success"><%= @completed_tasks.count %></div>
+            <small class="text-muted">Completed</small>
+          </div>
+          <div class="col-6 col-md-3 mb-3 mb-md-0">
+            <div class="display-6 display-md-4 text-danger"><%= @incomplete_tasks.count %></div>
+            <small class="text-muted">Incomplete</small>
+          </div>
+          <div class="col-6 col-md-3 mb-3 mb-md-0">
+            <div class="display-6 display-md-4 text-warning">
+              <%= @tasks.count > 0 ? (@completed_tasks.count.to_f / @tasks.count * 100).round : 0 %>%
             </div>
-            <div class="col-md-3">
-              <div class="display-6 text-success"><%= @completed_tasks.count %></div>
-              <small>Completed</small>
-            </div>
-            <div class="col-md-3">
-              <div class="display-6 text-warning"><%= @incomplete_tasks.count %></div>
-              <small>Incomplete</small>
-            </div>
-            <div class="col-md-3">
-              <div class="display-6 text-primary">
-                <%= @tasks.count > 0 ? (@completed_tasks.count.to_f / @tasks.count * 100).round : 0 %>%
-              </div>
-              <small>Completion Rate</small>
-            </div>
+            <small class="text-muted">Completion Rate</small>
           </div>
         </div>
       </div>
