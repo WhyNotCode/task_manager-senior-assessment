@@ -1,3 +1,10 @@
+# Routes configuration
+# =========================
+# Sets up RESTful routes for tasks and a custom route for toggling task completion.
+# Also includes routes for weather data and a health check endpoint.
+# =================================================================================
+
+
 Rails.application.routes.draw do
   root "tasks#index"
   resources :tasks

@@ -1,3 +1,14 @@
+# Tasks Controller
+# =========================
+# Manages CRUD operations for tasks in the Task Manager application.
+# Supports listing, creating, updating, deleting, and toggling completion status of tasks.
+# Utilizes strong parameters for security and handles responses in both HTML and JSON formats.  
+
+# Assumptions:
+# - Task model exists with attributes: title, description, completed_at (datetime)
+# - Routes are set up for standard RESTful actions plus a custom action for toggling completion status.
+# =================================================================================
+
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :toggle_complete]
 

@@ -1,3 +1,16 @@
+# Weather Service
+# =========================
+# This serves as a wrapper around the weather API
+# Fetches weather and astronomy data from WeatherAPI. Handles API calls, 
+# error handling, and caching (15-minute cache). Used by WeatherController. 
+# Auto-detects location from IP or falls back to Cape Town. Combines current
+# weather and sunrise/sunset data into one response.
+
+# Requires WEATHER_API_KEY in Rails credentials or ENV.
+# Assumptions:
+# - Rails cache is configured (e.g., memory store, Redis, etc.)
+# =================================================================================
+
 require 'net/http'
 require 'json'
 require 'uri'

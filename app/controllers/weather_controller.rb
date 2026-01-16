@@ -1,3 +1,15 @@
+# Weather Controller
+# =========================
+# Handles displaying current weather information based on user IP or manual location input.
+# Supports refreshing weather data by clearing cached entries.
+# Utilizes WeatherService for API interactions and caching.
+#
+# Assumptions:
+# - WeatherService exists and provides methods for fetching weather data. 
+# - Routes are set up for index and refresh actions.
+# =================================================================================
+
+
 class WeatherController < ApplicationController
   def index
     # Get user IP (will be localhost in development)

@@ -1,3 +1,13 @@
+# Task Model
+# =========================
+# Represents a task with title, description, and completion status.
+# Includes validations and scopes for completed/incomplete tasks.
+
+# Assumptions:
+# - Task model exists with attributes: title, description, completed_at (datetime)
+# =================================================================================
+
+
 class Task < ApplicationRecord
   # Validations
   validates :title, presence: true
