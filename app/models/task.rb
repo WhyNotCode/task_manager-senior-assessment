@@ -1,11 +1,15 @@
-# Task Model
-# =========================
-# Represents a task with title, description, and completion status.
-# Includes validations and scopes for completed/incomplete tasks.
+#== Schema Information
+# Table name: tasks
+#  id            :bigint           not null, primary key
+#  title         :string           not null
+#  description   :text
+#  completed_at  :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null       
 
-# Assumptions:
-# - Task model exists with attributes: title, description, completed_at (datetime)
-# =================================================================================
+# I realised that using a 'completed' boolean field can lead to data inconsistency.
+# Instead, I use 'completed_at' datetime field to track when a task was completed. 
+# It is also more informative as it tells us when the task was completed.
 
 
 class Task < ApplicationRecord
@@ -30,6 +34,10 @@ class Task < ApplicationRecord
     end
   end
 
+  def self.completion_percentage
+    return 0 if none?
+    (completed.count.to_f / count * 100).round
+  end
   
   # Helper methods
   def completed?
@@ -46,11 +54,5 @@ class Task < ApplicationRecord
   
   def toggle!
     update(completed: !completed)
-  end
-
-  # For statistics in our view
-  def completion_percentage
-    return 0 if Task.none?
-    (Task.completed.count.to_f / Task.count * 100).round
   end
 end
