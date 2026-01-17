@@ -55,10 +55,4 @@ class Task < ApplicationRecord
   def toggle!
     update(completed: !completed)
   end
-
-  # For statistics in our view
-  def completion_percentage
-    return 0 if Task.none?
-    (Task.completed.count.to_f / Task.count * 100).round
-  end
 end

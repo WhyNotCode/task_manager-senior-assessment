@@ -81,7 +81,7 @@ class WeatherService
 
   def self.is_ip_address?(str)
     return false if str.nil? || str.empty?
-    
+
     # Check for IPv4
     if str.match?(/\A(?:[0-9]{1,3}\.){3}[0-9]{1,3}\z/)
       # Validate each octet is 0-255
@@ -129,9 +129,8 @@ class WeatherService
   
   def self.fetch_astronomy_data(query)
     begin
-      response = Net::HTTP.get_response(
-        URI("#{BASE_URL}/astronomy.json?key=#{API_KEY}&q=#{query}")
-      )
+      uri = build_uri("astronomy", query)
+      response = Net::HTTP.get_response(uri)
       
       if response.is_a?(Net::HTTPSuccess)
         JSON.parse(response.body)
